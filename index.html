@@ -97,6 +97,59 @@
       font-size: 1.18rem;
     }
 
+    .hero__actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .music-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid rgba(255, 248, 236, .42);
+      border-radius: 999px;
+      color: #fff8ec;
+      background: rgba(22, 125, 154, .78);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, .22);
+    }
+
+    .music-toggle:hover {
+      background: rgba(22, 125, 154, .92);
+    }
+
+    .music-toggle::before {
+      content: "";
+      width: 0;
+      height: 0;
+      flex: 0 0 auto;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 11px solid currentColor;
+    }
+
+    .music-toggle[aria-pressed="true"]::before {
+      width: 10px;
+      height: 14px;
+      border: 0;
+      background: linear-gradient(to right, currentColor 0 4px, transparent 4px 6px, currentColor 6px 10px);
+    }
+
+    .music-frame {
+      width: 1px;
+      height: 1px;
+      position: absolute;
+      left: -9999px;
+      border: 0;
+    }
+
     main {
       background:
         linear-gradient(180deg, #fff8ec 0, #f6ead8 46%, #fff8ec 100%);
@@ -250,6 +303,11 @@
         font-size: 1rem;
       }
 
+      .music-toggle {
+        min-height: 42px;
+        padding: 0 15px;
+      }
+
       section {
         padding: 52px 0;
       }
@@ -311,6 +369,11 @@
       <p class="kicker">A backyard fable</p>
       <h1>The Lifeguard on the Brown Couch</h1>
       <p class="hero__dek">An old mastiff keeps watch over the pool, the slide, the chairs, and the small hinge hidden inside an ordinary summer day.</p>
+      <div class="hero__actions">
+        <button class="music-toggle" type="button" aria-pressed="false" data-music-toggle>
+          <span data-music-label>Play Song</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -453,5 +516,34 @@
       </div>
     </section>
   </main>
+  <script>
+    const musicToggle = document.querySelector("[data-music-toggle]");
+    const musicLabel = document.querySelector("[data-music-label]");
+    const songUrl = "https://www.youtube.com/embed/5QU0yP-RjqU?autoplay=1&playsinline=1";
+    let songFrame;
+
+    musicToggle.addEventListener("click", () => {
+      const isPlaying = musicToggle.getAttribute("aria-pressed") === "true";
+
+      if (isPlaying) {
+        songFrame.remove();
+        songFrame = null;
+        musicToggle.setAttribute("aria-pressed", "false");
+        musicLabel.textContent = "Play Song";
+        return;
+      }
+
+      songFrame = document.createElement("iframe");
+      songFrame.className = "music-frame";
+      songFrame.title = "The Kingdom Was Open";
+      songFrame.tabIndex = -1;
+      songFrame.setAttribute("aria-hidden", "true");
+      songFrame.allow = "autoplay; encrypted-media";
+      songFrame.src = songUrl;
+      document.body.append(songFrame);
+      musicToggle.setAttribute("aria-pressed", "true");
+      musicLabel.textContent = "Stop Song";
+    });
+  </script>
 </body>
 </html>
