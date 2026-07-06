@@ -97,12 +97,11 @@
       font-size: 1.18rem;
     }
 
-    .hero__actions {
-      margin-top: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
+    .music-dock {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 5;
     }
 
     .music-toggle {
@@ -303,9 +302,9 @@
         font-size: 1rem;
       }
 
-      .music-toggle {
-        min-height: 42px;
-        padding: 0 15px;
+      .music-dock {
+        right: 14px;
+        bottom: 14px;
       }
 
       section {
@@ -369,13 +368,14 @@
       <p class="kicker">A backyard fable</p>
       <h1>The Lifeguard on the Brown Couch</h1>
       <p class="hero__dek">An old mastiff keeps watch over the pool, the slide, the chairs, and the small hinge hidden inside an ordinary summer day.</p>
-      <div class="hero__actions">
-        <button class="music-toggle" type="button" aria-pressed="false" data-music-toggle>
-          <span data-music-label>Play Song</span>
-        </button>
-      </div>
     </div>
   </header>
+
+  <div class="music-dock">
+    <button class="music-toggle" type="button" aria-pressed="false" data-music-toggle>
+      <span data-music-label>Play Song</span>
+    </button>
+  </div>
 
   <main>
     <section>
