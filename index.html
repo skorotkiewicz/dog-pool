@@ -218,6 +218,7 @@
     }
 
     .story-band {
+      padding: 72px 0;
       background: #211a14;
       color: #fff8ec;
     }
@@ -311,6 +312,10 @@
         padding: 52px 0;
       }
 
+      .story-band {
+        padding: 52px 0;
+      }
+
       .intro,
       .story,
       .closing .wrap {
@@ -400,12 +405,12 @@
       </div>
     </section>
 
-    <section class="story-band">
+    <div class="story-band">
       <article class="wrap story">
-        <aside class="story__note" aria-label="Story note">
+        <header class="story__note">
           <h2>The Story</h2>
           <p>Read with the main image in mind: the dog is still, but the whole afternoon is about to open.</p>
-        </aside>
+        </header>
 
         <div class="story__body">
           <p>The old mastiff had chosen the middle cushion because it was not the most comfortable place to sit, which made it, naturally, the most important.</p>
@@ -507,14 +512,14 @@
           <blockquote class="pullquote">A soft, royal knock.<br>The kingdom was open.</blockquote>
         </div>
       </article>
-    </section>
+    </div>
 
-    <section class="closing">
+    <div class="closing">
       <div class="wrap">
         <img src="assets/dog-pool.jpg" alt="The original backyard pool photo that inspired the story." loading="lazy" decoding="async">
         <p>The original scene stays simple: one dog, one couch, one blue pool. The story turns that stillness into a whole afternoon.</p>
       </div>
-    </section>
+    </div>
   </main>
   <script>
     const musicToggle = document.querySelector("[data-music-toggle]");
