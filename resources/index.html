@@ -100,13 +100,15 @@
     }
 
     .music-dock {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-      z-index: 5;
+      margin-top: 12px;
     }
 
-    .music-toggle {
+    .support-dock {
+      margin-top: 24px;
+    }
+
+    .music-toggle,
+    .paypal-button {
       display: inline-flex;
       align-items: center;
       gap: 10px;
@@ -120,6 +122,26 @@
       font-weight: 800;
       cursor: pointer;
       box-shadow: 0 14px 32px rgba(0, 0, 0, .22);
+    }
+
+    .paypal-button {
+      padding: 0 16px;
+      text-decoration: none;
+      background: #003087;
+    }
+
+    .paypal-button:hover {
+      background: #012169;
+    }
+
+    .paypal-button svg {
+      flex: 0 0 auto;
+      margin-top: 4px;
+    }
+
+    .paypal-button span {
+      color: #fff;
+      font-size: .9rem;
     }
 
     .music-toggle:hover {
@@ -306,8 +328,7 @@
       }
 
       .music-dock {
-        right: 14px;
-        bottom: 14px;
+        margin-top: 12px;
       }
 
       section {
@@ -377,12 +398,6 @@
       <p class="hero__dek">An old mastiff keeps watch over the pool, the slide, the chairs, and the small hinge hidden inside an ordinary summer day.</p>
     </div>
   </header>
-
-  <div class="music-dock">
-    <button class="music-toggle" type="button" aria-pressed="false" data-music-toggle>
-      <span data-music-label>Play Song</span>
-    </button>
-  </div>
 
   <main>
     <section>
@@ -519,7 +534,24 @@
     <div class="closing">
       <div class="wrap">
         <img src="assets/dog-pool.jpg" alt="The original backyard pool photo that inspired the story." loading="lazy" decoding="async">
-        <p>The original scene stays simple: one dog, one couch, one blue pool. The story turns that stillness into a whole afternoon.</p>
+        <div>
+          <p>The original scene stays simple: one dog, one couch, one blue pool. The story turns that stillness into a whole afternoon.</p>
+          <div class="support-dock">
+            <a class="paypal-button" target="_blank" rel="noopener" href="https://paypal.me/skorotkiewicz">
+              <svg width="27" height="27" viewBox="0 0 24 32" aria-hidden="true">
+                <path fill="#009cde" d="M20.905 9.5C21.185 7.4 20.905 6 19.782 4.7 18.564 3.3 16.411 2.6 13.697 2.6H5.739C5.271 2.6 4.71 3.1 4.615 3.6L1.339 25.8C1.339 26.2 1.62 26.7 2.088 26.7H6.956L6.675 28.9C6.581 29.3 6.862 29.6 7.236 29.6h4.12C11.825 29.6 12.292 29.3 12.386 28.8V28.5L13.228 23.3V23.1C13.322 22.6 13.79 22.2 14.258 22.2H14.821C18.845 22.2 21.935 20.5 22.871 15.5 23.339 13.4 23.153 11.7 22.029 10.5 21.748 10.1 21.279 9.8 20.905 9.5"></path>
+                <path fill="#012169" d="M20.905 9.5C21.185 7.4 20.905 6 19.782 4.7 18.564 3.3 16.411 2.6 13.697 2.6H5.739C5.271 2.6 4.71 3.1 4.615 3.6L1.339 25.8C1.339 26.2 1.62 26.7 2.088 26.7H6.956L8.267 18.4 8.173 18.7C8.267 18.1 8.735 17.7 9.296 17.7h2.34C16.224 17.7 19.782 15.7 20.905 10.1 20.812 9.8 20.905 9.7 20.905 9.5"></path>
+                <path fill="#003087" d="M9.485 9.5C9.577 9.2 9.765 8.9 10.046 8.7 10.232 8.7 10.326 8.6 10.513 8.6h6.179C17.442 8.6 18.189 8.7 18.753 8.8 18.939 8.8 19.127 8.8 19.314 8.9S19.688 9 19.782 9.1C19.875 9.1 19.968 9.1 20.063 9.1 20.343 9.2 20.624 9.4 20.905 9.5 21.185 7.4 20.905 6 19.782 4.6 18.658 3.2 16.506 2.6 13.79 2.6H5.739C5.271 2.6 4.71 3 4.615 3.6L1.339 25.8C1.339 26.2 1.62 26.7 2.088 26.7H6.956L8.267 18.4 9.485 9.5z"></path>
+              </svg>
+              <span>Support via PayPal</span>
+            </a>
+          </div>
+          <div class="music-dock">
+            <button class="music-toggle" type="button" aria-pressed="false" data-music-toggle>
+              <span data-music-label>Play Song</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </main>
