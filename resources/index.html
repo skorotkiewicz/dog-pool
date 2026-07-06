@@ -144,6 +144,27 @@
       font-size: .9rem;
     }
 
+    /*#read-toggle {
+      display: inline-block;
+      margin-top: 12px;
+      background: transparent;
+      color: var(--paper);
+      border: none;
+      font: inherit;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }*/
+
+    #story-audio {
+      display:block;
+      width:calc(100% - 40px);
+      max-width:360px;
+      margin:24px auto;
+    }
+
     .music-toggle:hover {
       background: rgba(22, 125, 154, .92);
     }
@@ -427,6 +448,11 @@
         <header class="story__note">
           <h2>The Story</h2>
           <p>Read with the main image in mind: the dog is still, but the whole afternoon is about to open.</p>
+          <!--<audio id="story-audio" preload="metadata" >-->
+          <audio controls id="story-audio" preload="metadata">
+           <source src="assets/story.aac" type="audio/mp4">
+          </audio>
+          <!--<button id="read-toggle">Read</button>-->
         </header>
 
         <div class="story__body">
@@ -583,6 +609,17 @@
       musicToggle.setAttribute("aria-pressed", "true");
       musicLabel.textContent = "Stop Song";
     });
+
+    // document.getElementById("read-toggle").addEventListener("click", function () {
+    //   const audio = document.getElementById("story-audio");
+    //   if (audio.paused) {
+    //     audio.play();
+    //     this.textContent = "Pause";
+    //   } else {
+    //     audio.pause();
+    //     this.textContent = "Read";
+    //   }
+    // });
   </script>
 </body>
 </html>
