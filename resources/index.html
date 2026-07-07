@@ -346,6 +346,11 @@
       box-shadow: 0 0 0 12px rgba(156, 220, 231, .07);
     }
 
+    .story__body.is-reading-active [data-start]:hover:not(.is-reading) {
+      background: transparent;
+      box-shadow: none;
+    }
+
     .story__body [data-start]:focus-visible {
       outline: 3px solid rgba(156, 220, 231, .72);
       outline-offset: 8px;
@@ -661,6 +666,7 @@
 
     const clearReadHighlight = () => {
       activeSegment?.classList.remove("is-reading");
+      storyBody.classList.remove("is-reading-active");
       activeSegment = null;
     };
 
@@ -690,6 +696,7 @@
 
       if (current) {
         current.classList.add("is-reading");
+        storyBody.classList.add("is-reading-active");
         activeSegment = current;
       }
     };
