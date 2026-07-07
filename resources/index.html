@@ -326,6 +326,20 @@
       transition: color .2s ease, background-color .2s ease, box-shadow .2s ease;
     }
 
+    .story__body [data-start] {
+      cursor: pointer;
+    }
+
+    .story__body [data-start]:hover {
+      background: rgba(156, 220, 231, .07);
+      box-shadow: 0 0 0 12px rgba(156, 220, 231, .07);
+    }
+
+    .story__body [data-start]:focus-visible {
+      outline: 3px solid rgba(156, 220, 231, .72);
+      outline-offset: 8px;
+    }
+
     .story__body .is-reading {
       color: #fff;
       background: rgba(156, 220, 231, .1);
@@ -488,7 +502,7 @@
             <span data-read-label>Read Story</span>
           </button>
           <audio id="story-audio" preload="metadata" hidden>
-            <source src="assets/story.aac" type="audio/aac">
+            <source src="assets/story.m4a" type="audio/mp4">
           </audio>
         </header>
 
@@ -624,11 +638,13 @@
     const readToggle = document.querySelector("[data-read-toggle]");
     const readLabel = document.querySelector("[data-read-label]");
     const storyAudio = document.getElementById("story-audio");
+    const storyBody = document.querySelector(".story__body");
     const storySegments = [...document.querySelectorAll(".story__body p, .story__body .pullquote")];
     const songUrl = "https://www.youtube.com/embed/5QU0yP-RjqU?autoplay=1&playsinline=1";
     let songFrame;
     let storyTimings = [];
     let activeSegment;
+    let pendingStart;
 
     const clearReadHighlight = () => {
       activeSegment?.classList.remove("is-reading");
@@ -672,6 +688,38 @@
       readLabel.textContent = "Read Story";
     };
 
+    const startReading = () => {
+      return storyAudio.play().then(() => {
+        readToggle.setAttribute("aria-pressed", "true");
+        readLabel.textContent = "Stop Reading";
+      }).catch(resetReadToggle);
+    };
+
+    const readFromSegment = (segment) => {
+      const start = Number(segment.dataset.start);
+      if (!Number.isFinite(start)) return;
+
+      pendingStart = start;
+      if (storyAudio.readyState < 1) {
+        storyAudio.addEventListener("loadedmetadata", () => {
+          if (pendingStart == null) return;
+
+          const nextStart = pendingStart;
+          pendingStart = null;
+          storyAudio.currentTime = nextStart;
+          syncReadHighlight();
+          startReading();
+        }, { once: true });
+        storyAudio.load();
+        return;
+      }
+
+      pendingStart = null;
+      storyAudio.currentTime = start;
+      syncReadHighlight();
+      startReading();
+    };
+
     musicToggle.addEventListener("click", () => {
       const isPlaying = musicToggle.getAttribute("aria-pressed") === "true";
 
@@ -704,10 +752,26 @@
         return;
       }
 
-      storyAudio.play().then(() => {
-        readToggle.setAttribute("aria-pressed", "true");
-        readLabel.textContent = "Stop Reading";
-      }).catch(resetReadToggle);
+      startReading();
+    });
+
+    storySegments.forEach((segment) => {
+      segment.tabIndex = 0;
+    });
+
+    storyBody.addEventListener("click", (event) => {
+      const segment = event.target.closest("[data-start]");
+      if (segment) readFromSegment(segment);
+    });
+
+    storyBody.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+
+      const segment = event.target.closest("[data-start]");
+      if (!segment) return;
+
+      event.preventDefault();
+      readFromSegment(segment);
     });
 
     storyAudio.addEventListener("loadedmetadata", buildStoryTimings);
