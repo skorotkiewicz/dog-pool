@@ -109,8 +109,7 @@
       const cleanAttrs = attrs
         .replace(/\sdata-start="[^"]*"/g, '')
         .replace(/\sdata-end="[^"]*"/g, '');
-      return `<${tag}${cleanAttrs} data-start="${timing.start.toFixed(2)}" data-
-    end="${timing.end.toFixed(2)}">${content}</${tag}>`;
+      return `<${tag}${cleanAttrs} data-start="${timing.start.toFixed(2)}" data-end="${timing.end.toFixed(2)}">${content}</${tag}>`;
     });
 
     fs.writeFileSync(file, html.replace(sectionRe, `$1${body}$3`));
